@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://32h4iysmtqwo"]
+
+[ext_resource type="Script" uid="uid://ru74oipr554v" path="res://Objects/FlickeringComponent.cs" id="1_o04n7"]
+
+[node name="flickeringComponent" type="Node2D" unique_id=1816462289]
+script = ExtResource("1_o04n7")

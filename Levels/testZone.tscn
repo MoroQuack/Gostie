@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bi86d4h5u7rf3" path="res://Assets/tiles/tileSetData.tres" id="1_w1ixc"]
 [ext_resource type="PackedScene" uid="uid://vrrqwgksbctp" path="res://Objects/laser_light.tscn" id="2_lkbjs"]
-[ext_resource type="PackedScene" uid="uid://cvth7vbbhtlb2" path="res://Objects/rotate_component.tscn" id="3_lkbjs"]
+[ext_resource type="PackedScene" uid="uid://32h4iysmtqwo" path="res://Objects/flickering_component.tscn" id="3_lkbjs"]
 [ext_resource type="PackedScene" uid="uid://v2ulg5sh8lmx" path="res://Objects/goal.tscn" id="3_s04a7"]
 [ext_resource type="PackedScene" uid="uid://c3gsil7t3i3mk" path="res://Player/gostie.tscn" id="4_vofi0"]
 
@@ -16,7 +16,9 @@ tile_set = ExtResource("1_w1ixc")
 position = Vector2(566, 371)
 RayCount = 45
 
-[node name="RotateComponent" parent="LaserLight" unique_id=458849040 instance=ExtResource("3_lkbjs")]
+[node name="flickeringComponent" parent="LaserLight" unique_id=1816462289 instance=ExtResource("3_lkbjs")]
+StaysOnTimer = 2.0
+StaysOffTimer = 2.0
 
 [node name="Goal" parent="." unique_id=1044788402 instance=ExtResource("3_s04a7")]
 position = Vector2(1047, 453)

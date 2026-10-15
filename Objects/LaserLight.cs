@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-public partial class LaserLight : Node2D
+public partial class LaserLight : Node2D,ICanFlicker
 {
 	[Export] public int RayCount = 360; 
 	[Export] public float MaxDistance = 1000.0f;
 	[Export] public Color LineColor = new Color(80, 80, 80, 0.8f); 
 
-	
+	[Export] public bool On = true;
 
 	private List<Vector2> _drawPoints = new List<Vector2>();
 
@@ -35,51 +35,55 @@ public partial class LaserLight : Node2D
 
 	public void CalculateDrawingPoints()
 	{
-		_drawPoints.Clear();
-		if(RayCount != 360)_drawPoints.Add(Vector2.Zero);
-
-		var spaceState = GetWorld2D().DirectSpaceState;
-
-		
-		float angleStep = Mathf.Tau / 360;
-
-		for (int i = 0; i < RayCount; i++)
+		if(!On)_EraseEverything();
+		else
 		{
-		
-			float angle = (90 - RayCount/2 + RotationDegrees + i) * angleStep;
+			_drawPoints.Clear();
+			if(RayCount != 360)_drawPoints.Add(Vector2.Zero);
+
+			var spaceState = GetWorld2D().DirectSpaceState;
+
 			
-			Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-			
-			// calculate end (if no hit)
-			Vector2 endPosition = GlobalPosition + (direction * MaxDistance);
+			float angleStep = Mathf.Tau / 360;
 
-			// Create the ray parameter query
-			var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, endPosition);
-			query.CollisionMask = 1 | 2;
-			var result = spaceState.IntersectRay(query);
-
-			Vector2 drawEndPos;
-
-			// if Count > 0 then it hit a wall
-			if (result.Count > 0)
+			for (int i = 0; i < RayCount; i++)
 			{
-				// finish line at wall
-				drawEndPos = ToLocal((Vector2)result["position"]);
-				//see if its player
-				Node collider = (Node)result["collider"];
-				if (collider.IsInGroup("player"))
+			
+				float angle = (90 - RayCount/2 + RotationDegrees + i) * angleStep;
+				
+				Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+				
+				// calculate end (if no hit)
+				Vector2 endPosition = GlobalPosition + (direction * MaxDistance);
+
+				// Create the ray parameter query
+				var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, endPosition);
+				query.CollisionMask = 1 | 2;
+				var result = spaceState.IntersectRay(query);
+
+				Vector2 drawEndPos;
+
+				// if Count > 0 then it hit a wall
+				if (result.Count > 0)
 				{
-					collider.Call("getHit");
+					// finish line at wall
+					drawEndPos = ToLocal((Vector2)result["position"]);
+					//see if its player
+					Node collider = (Node)result["collider"];
+					if (collider.IsInGroup("player"))
+					{
+						collider.Call("getHit");
+					}
 				}
-			}
-			else
-			{
-				// draw full line
-				drawEndPos = ToLocal(endPosition);
-			}
-			_drawPoints.Add(drawEndPos);
-		}			
-		QueueRedraw();
+				else
+				{
+					// draw full line
+					drawEndPos = ToLocal(endPosition);
+				}
+				_drawPoints.Add(drawEndPos);
+			}			
+			QueueRedraw();
+		}
 	}
 
 	
@@ -103,5 +107,19 @@ public partial class LaserLight : Node2D
 	{
 		_drawPoints.Clear();
 		QueueRedraw();
+	}
+
+	public void TurnOn()
+	{
+		On=true;
+	}
+	public void TurnOff()
+	{
+		On=false;
+		_EraseEverything();
+	}
+	public bool IsOn()
+	{
+		return On;
 	}
 }
