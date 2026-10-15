@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bi86d4h5u7rf3" path="res://Assets/tiles/tileSetData.tres" id="1_njhy2"]
 [ext_resource type="PackedScene" uid="uid://c3gsil7t3i3mk" path="res://Player/gostie.tscn" id="2_m6f6w"]
-[ext_resource type="PackedScene" uid="uid://vrrqwgksbctp" path="res://Objects/laser_light.tscn" id="3_302sc"]
+[ext_resource type="PackedScene" uid="uid://vrrqwgksbctp" path="res://Objects/torch_light.tscn" id="3_302sc"]
 [ext_resource type="PackedScene" uid="uid://v2ulg5sh8lmx" path="res://Objects/goal.tscn" id="4_aunfx"]
 
 [node name="testZone" type="Node2D" unique_id=2141221325]

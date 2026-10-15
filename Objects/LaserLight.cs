@@ -7,6 +7,7 @@ public partial class LaserLight : Node2D,ICanFlicker
 {
 	[Export] public int RayCount = 360; 
 	[Export] public float MaxDistance = 1000.0f;
+	[Export] public float Width = 50f;
 	[Export] public Color LineColor = new Color(80, 80, 80, 0.8f); 
 
 	[Export] public bool On = true;
@@ -39,36 +40,46 @@ public partial class LaserLight : Node2D,ICanFlicker
 		else
 		{
 			_drawPoints.Clear();
-			if(RayCount != 360)_drawPoints.Add(Vector2.Zero);
-
 			var spaceState = GetWorld2D().DirectSpaceState;
 
-			
-			float angleStep = Mathf.Tau / 360;
+			// GlobalTransform.X is exactly Forward. 
+			// GlobalTransform.Y is exactly Sideways (Perpendicular).
+			Vector2 forward = GlobalTransform.X.Normalized();
+			Vector2 sideways = GlobalTransform.Y.Normalized();
+
+			// Divide by RayCount - 1 so the first ray is exactly on the left edge and the last is exactly on the right edge
+			float rayDistance = Width / Mathf.Max(1, RayCount - 1);
+
+			// Create temporary lists so we don't mess up the polygon drawing order
+			List<Vector2> startPoints = new List<Vector2>();
+			List<Vector2> hitPoints = new List<Vector2>();
 
 			for (int i = 0; i < RayCount; i++)
 			{
-			
-				float angle = (90 - RayCount/2 + RotationDegrees + i) * angleStep;
+				// 1. Calculate the spread from -Width/2 to +Width/2
+				float currentOffset = (-Width / 2.0f) + (i * rayDistance);
+
+				// 2. Move the global position sideways by the offset amount
+				Vector2 globalStart = GlobalPosition + (sideways * currentOffset);
 				
-				Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-				
-				// calculate end (if no hit)
-				Vector2 endPosition = GlobalPosition + (direction * MaxDistance);
+				// 3. Shoot the ray forward from that new start point
+				Vector2 globalEnd = globalStart + (forward * MaxDistance);
+
+				// Save the local start point for drawing later
+				startPoints.Add(ToLocal(globalStart));
 
 				// Create the ray parameter query
-				var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, endPosition);
+				var query = PhysicsRayQueryParameters2D.Create(globalStart, globalEnd);
 				query.CollisionMask = 1 | 2;
 				var result = spaceState.IntersectRay(query);
-
-				Vector2 drawEndPos;
 
 				// if Count > 0 then it hit a wall
 				if (result.Count > 0)
 				{
 					// finish line at wall
-					drawEndPos = ToLocal((Vector2)result["position"]);
-					//see if its player
+					hitPoints.Add(ToLocal((Vector2)result["position"]));
+					
+					// see if its player
 					Node collider = (Node)result["collider"];
 					if (collider.IsInGroup("player"))
 					{
@@ -78,12 +89,17 @@ public partial class LaserLight : Node2D,ICanFlicker
 				else
 				{
 					// draw full line
-					drawEndPos = ToLocal(endPosition);
+					hitPoints.Add(ToLocal(globalEnd));
 				}
-				_drawPoints.Add(drawEndPos);
-			}			
+			} 
+
+			// 4. Build the polygon outline in a perfect loop
+			_drawPoints.AddRange(startPoints); // Base of the laser (left to right)
+			hitPoints.Reverse();               // Reverse the hits so it draws backwards (right to left)
+			_drawPoints.AddRange(hitPoints);   // End of the laser	
 			QueueRedraw();
 		}
+		
 	}
 
 	

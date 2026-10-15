@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://vrrqwgksbctp"]
+[gd_scene format=3 uid="uid://c68fv0q4krafv"]
 
-[ext_resource type="Script" uid="uid://blmedor5po608" path="res://Objects/LaserLight.cs" id="1_f8ruf"]
+[ext_resource type="Script" uid="uid://djbvd5tpk1d6p" path="res://Objects/LaserLight.cs" id="1_f8ruf"]
 [ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://Assets/icon.svg" id="2_s8m73"]
 
-[node name="LaserLight" type="Node2D" unique_id=44203302]
+[node name="LaserLight" type="Node2D" unique_id=219088787]
 script = ExtResource("1_f8ruf")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1589111472]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=419989708]
 scale = Vector2(0.53, 0.53)
 texture = ExtResource("2_s8m73")
