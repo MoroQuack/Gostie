@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c3gsil7t3i3mk"]
 
-[ext_resource type="Script" uid="uid://im11rj42lnex" path="res://Gostie.cs" id="1_523ny"]
-[ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://icon.svg" id="2_osw4g"]
+[ext_resource type="Script" uid="uid://im11rj42lnex" path="res://Player/Gostie.cs" id="1_46scm"]
+[ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://Assets/icon.svg" id="2_0j6kx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4j24a"]
 radius = 55.0
@@ -9,7 +9,7 @@ height = 116.0
 
 [node name="Gostie" type="CharacterBody2D" unique_id=1156585486]
 collision_mask = 2
-script = ExtResource("1_523ny")
+script = ExtResource("1_46scm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=580845928]
 scale = Vector2(0.34, 0.34)
@@ -17,4 +17,4 @@ shape = SubResource("CapsuleShape2D_4j24a")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1620831532]
 scale = Vector2(0.34, 0.34)
-texture = ExtResource("2_osw4g")
+texture = ExtResource("2_0j6kx")

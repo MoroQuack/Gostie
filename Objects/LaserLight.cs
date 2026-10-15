@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 public partial class LaserLight : Node2D
 {
@@ -13,8 +14,16 @@ public partial class LaserLight : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		//Wait because it would load before walls
+		SetPhysicsProcess(false);
+		_Wait();
 		//Redraws
 		QueueRedraw();
+	}
+	private async void _Wait()
+	{
+		await ToSignal(GetTree().CreateTimer(0.05), SceneTreeTimer.SignalName.Timeout);
+		SetPhysicsProcess(true);
 	}
 
 	public override void _PhysicsProcess (double delta)

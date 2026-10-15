@@ -16,33 +16,24 @@ public partial class Gostie : CharacterBody2D
 	}
 
 
-	public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	//public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 newVelocity = Velocity;
-		//gravity
-		if (!IsOnFloor())
-		{
-			newVelocity.Y += Gravity * (float)delta;
-		}
 
-		//jump
-		if(Input.IsActionJustPressed("jump") && IsOnFloor())
-		{
-			newVelocity.Y = JumpVelocity;
-		}
-
-		float direction = Input.GetAxis("left", "right");
-		if (direction != 0)
+		Vector2 direction = Input.GetVector("left", "right","up","down");
+		if (direction.X != 0 || direction.Y != 0)
 		{
 			//go
-			newVelocity.X = Speed * direction;
+			newVelocity = Speed * direction;
 		}
 		else
 		{
 			//slow down
 			newVelocity.X = Mathf.MoveToward(Velocity.X,0,Speed);
+			newVelocity.Y = Mathf.MoveToward(Velocity.Y,0,Speed);
 		}
 		Velocity = newVelocity;
 		MoveAndSlide();
