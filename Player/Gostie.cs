@@ -7,14 +7,21 @@ public partial class Gostie : CharacterBody2D
 	public float Speed = 300.0f;
 	[Export]
 	public float JumpVelocity = -500.0f;
+	private bool _invincible = true;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		GD.Print("Player spawned");
 		AddToGroup("player");
+		_Wait();
 	}
 
+	private async void _Wait()
+	{
+		await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout);
+		_invincible = false;
+	}
 
 	//public float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	
@@ -42,6 +49,6 @@ public partial class Gostie : CharacterBody2D
 	public void getHit()
 	{
 		GD.Print("Player hit");
-		GetTree().ReloadCurrentScene();
+		if(!_invincible)GetTree().ReloadCurrentScene();
 	}
 }

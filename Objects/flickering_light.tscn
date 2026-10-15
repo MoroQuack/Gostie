@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cn00u4bhh5cvi"]
+
+[ext_resource type="PackedScene" uid="uid://vrrqwgksbctp" path="res://Objects/laser_light.tscn" id="1_ilobe"]
+[ext_resource type="Script" uid="uid://becwxxvttew75" path="res://Objects/FlickeringLight.cs" id="2_38bn7"]
+
+[node name="FlickeringLight" unique_id=44203302 instance=ExtResource("1_ilobe")]
+script = ExtResource("2_38bn7")

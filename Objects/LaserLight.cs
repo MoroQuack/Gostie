@@ -8,24 +8,16 @@ public partial class LaserLight : Node2D
 	[Export] public int RayCount = 360; 
 	[Export] public float MaxDistance = 1000.0f;
 	[Export] public Color LineColor = new Color(80, 80, 80, 0.8f); 
-	[Export] public double TurnOffTime = 0;
-	[Export] public double StartingTurnOffTime = 0;
-
-	private double _turnOffTimer = 0;
-	private bool _on;
+	
 
 	private List<Vector2> _drawPoints = new List<Vector2>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//Wait because it would load before walls
 		SetPhysicsProcess(false);
+		//Wait because it would load before walls
 		_Wait();
-
-		_turnOffTimer = StartingTurnOffTime;
-
-		_on = true;
 		//Redraws
 		QueueRedraw();
 	}
@@ -36,67 +28,57 @@ public partial class LaserLight : Node2D
 	}
 
 	public override void _PhysicsProcess (double delta)
+	{	
+		CalculateDrawingPoints();
+	}
+
+	public void CalculateDrawingPoints()
 	{
-		if(TurnOffTime != 0)
-		{
-			_turnOffTimer += delta;
-			if(_turnOffTimer >= TurnOffTime)
-			{
-				_turnOffTimer = 0;
-				_on = !_on;
-				GD.Print(_on);
-			}
-		}
-		
 		_drawPoints.Clear();
 		//_drawPoints.Add(Vector2.Zero);
 
-		if (_on)
+		var spaceState = GetWorld2D().DirectSpaceState;
+
+		// calculate when to make rays (tau is 360 degrees)
+		float angleStep = Mathf.Tau / RayCount;
+
+		for (int i = 0; i < RayCount; i++)
 		{
-			var spaceState = GetWorld2D().DirectSpaceState;
+			float angle = i * angleStep;
+			
+			Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+			
+			// calculate end (if no hit)
+			Vector2 endPosition = GlobalPosition + (direction * MaxDistance);
 
-			// calculate when to make rays (tau is 360 degrees)
-			float angleStep = Mathf.Tau / RayCount;
+			// Create the ray parameter query
+			var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, endPosition);
+			
+			var result = spaceState.IntersectRay(query);
 
-			for (int i = 0; i < RayCount; i++)
+			Vector2 drawEndPos;
+
+			// if Count > 0 then it hit a wall
+			if (result.Count > 0)
 			{
-				float angle = i * angleStep;
-				
-				Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-				
-				// calculate end (if no hit)
-				Vector2 endPosition = GlobalPosition + (direction * MaxDistance);
-
-				// Create the ray parameter query
-				var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, endPosition);
-				
-				var result = spaceState.IntersectRay(query);
-
-				Vector2 drawEndPos;
-
-				// if Count > 0 then it hit a wall
-				if (result.Count > 0)
+				// finish line at wall
+				drawEndPos = ToLocal((Vector2)result["position"]);
+				//see if its player
+				Node collider = (Node)result["collider"];
+				if (collider.IsInGroup("player"))
 				{
-					// finish line at wall
-					drawEndPos = ToLocal((Vector2)result["position"]);
-					//see if its player
-					Node collider = (Node)result["collider"];
-					if (collider.IsInGroup("player"))
-					{
-						collider.Call("getHit");
-					}
+					collider.Call("getHit");
 				}
-				else
-				{
-					// draw full line
-					drawEndPos = ToLocal(endPosition);
-				}
-				_drawPoints.Add(drawEndPos);
-			}			
-		}
+			}
+			else
+			{
+				// draw full line
+				drawEndPos = ToLocal(endPosition);
+			}
+			_drawPoints.Add(drawEndPos);
+		}			
 		QueueRedraw();
 	}
-
 
 	
 	public override void _Draw()
@@ -111,11 +93,13 @@ public partial class LaserLight : Node2D
 		// Don't draw if we don't have enough points to build a shape
 		if (_drawPoints.Count < 3) return;
 
-		//don't draw if light is off
-		if(!_on)return;
-
 		// --- 2. Draw the filled shape ---
 		// Generates a transparent 2D polygon connecting all the ray points
 		DrawPolygon(_drawPoints.ToArray(), new Color[] { LineColor });
+	}
+	public void _EraseEverything()
+	{
+		_drawPoints.Clear();
+		QueueRedraw();
 	}
 }
