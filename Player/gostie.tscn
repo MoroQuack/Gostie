@@ -8,7 +8,7 @@ radius = 55.0
 height = 116.0
 
 [node name="Gostie" type="CharacterBody2D" unique_id=1156585486]
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_46scm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=580845928]

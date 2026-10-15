@@ -8,6 +8,7 @@ public partial class LaserLight : Node2D
 	[Export] public int RayCount = 360; 
 	[Export] public float MaxDistance = 1000.0f;
 	[Export] public Color LineColor = new Color(80, 80, 80, 0.8f); 
+
 	
 
 	private List<Vector2> _drawPoints = new List<Vector2>();
@@ -35,16 +36,17 @@ public partial class LaserLight : Node2D
 	public void CalculateDrawingPoints()
 	{
 		_drawPoints.Clear();
-		//_drawPoints.Add(Vector2.Zero);
+		if(RayCount != 360)_drawPoints.Add(Vector2.Zero);
 
 		var spaceState = GetWorld2D().DirectSpaceState;
 
-		// calculate when to make rays (tau is 360 degrees)
-		float angleStep = Mathf.Tau / RayCount;
+		
+		float angleStep = Mathf.Tau / 360;
 
 		for (int i = 0; i < RayCount; i++)
 		{
-			float angle = i * angleStep;
+		
+			float angle = (90 - RayCount/2 + RotationDegrees + i) * angleStep;
 			
 			Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 			
@@ -53,7 +55,7 @@ public partial class LaserLight : Node2D
 
 			// Create the ray parameter query
 			var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, endPosition);
-			
+			query.CollisionMask = 1 | 2;
 			var result = spaceState.IntersectRay(query);
 
 			Vector2 drawEndPos;
