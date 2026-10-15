@@ -55,7 +55,7 @@ RayCount = 30
 
 [node name="Goal" parent="." unique_id=1044788402 instance=ExtResource("3_nanxr")]
 position = Vector2(1086, 314)
-nextScene = "level3.tscn"
+nextScene = "level5.tscn"
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("4_btbpw")]
 position = Vector2(49, 311)
