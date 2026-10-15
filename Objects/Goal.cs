@@ -21,7 +21,7 @@ public partial class Goal : Area2D
 		if (body.IsInGroup("player"))
 		{
 			GD.Print("player won!");
-			GetTree().ChangeSceneToFile("res://Levels/" + nextScene);
+			GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile,"res://Levels/" + nextScene);
 		}
 		
 	}
