@@ -51,5 +51,6 @@ public partial class Gostie : CharacterBody2D
 	public void getHit()
 	{
 		GD.Print("Player hit");
+		GetTree().ReloadCurrentScene();
 	}
 }
