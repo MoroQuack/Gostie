@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cqv2dv56myhxc"]
+
+[ext_resource type="Script" uid="uid://bk5g8i0g3t6ug" path="res://Objects/Switch.cs" id="1_g0mj6"]
+[ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://Assets/icon.svg" id="1_yyvnn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4j24a"]
+size = Vector2(21, 68)
+
+[node name="Switch" type="Area2D" unique_id=478898991]
+script = ExtResource("1_g0mj6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=62627617]
+position = Vector2(0.50000095, -1.4999995)
+scale = Vector2(0.2265625, 0.5390625)
+texture = ExtResource("1_yyvnn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=13617060]
+position = Vector2(4, -2)
+shape = SubResource("RectangleShape2D_4j24a")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

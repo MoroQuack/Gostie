@@ -8,12 +8,12 @@ public partial class FlickeringComponent : Node
 	private double _timer = 0;
 	
 	// This will hold whatever object this component is attached to
-	private ICanFlicker _parent;
+	private IToggleable _parent;
 
 	public override void _Ready()
 	{
 		// Get the parent node that this script is a child of
-		_parent = (ICanFlicker)GetParent<Node2D>();
+		_parent = (IToggleable)GetParent<Node2D>();
 		_timer = StartingTime;
 	}
 
@@ -21,11 +21,11 @@ public partial class FlickeringComponent : Node
 	{
 		_timer += delta;
 		if((_parent.IsOn() && _timer >= StaysOnTimer)){
-			_parent.TurnOff();
+			_parent.ChangeOnOf();
 			_timer = 0;
 		}else if (!_parent.IsOn() && _timer >= StaysOffTimer)
 		{
-			_parent.TurnOn();
+			_parent.ChangeOnOf();
 			_timer = 0;
 		}
 	}

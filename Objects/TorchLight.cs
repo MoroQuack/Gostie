@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-public partial class TorchLight : Node2D,ICanFlicker
+public partial class TorchLight : Node2D,IToggleable
 {
 	[Export] public int RayCount = 360; 
 	[Export] public float MaxDistance = 1000.0f;
@@ -109,14 +109,10 @@ public partial class TorchLight : Node2D,ICanFlicker
 		QueueRedraw();
 	}
 
-	public void TurnOn()
+	public void ChangeOnOf()
 	{
-		On=true;
-	}
-	public void TurnOff()
-	{
-		On=false;
-		_EraseEverything();
+		if(On==true)_EraseEverything();
+		On=!On;
 	}
 	public bool IsOn()
 	{
