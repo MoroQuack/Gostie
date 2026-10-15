@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://v2ulg5sh8lmx" path="res://Objects/goal.tscn" id="3_s04a7"]
 [ext_resource type="PackedScene" uid="uid://c3gsil7t3i3mk" path="res://Player/gostie.tscn" id="4_vofi0"]
 [ext_resource type="PackedScene" uid="uid://cvth7vbbhtlb2" path="res://Objects/rotate_component.tscn" id="5_lkbjs"]
+[ext_resource type="PackedScene" uid="uid://kbxkx6ydftrw" path="res://Objects/light_switch.tscn" id="6_qwdj4"]
 [ext_resource type="PackedScene" uid="uid://cqv2dv56myhxc" path="res://Objects/switch.tscn" id="6_s04a7"]
 [ext_resource type="PackedScene" uid="uid://c3payecmod35v" path="res://Objects/door.tscn" id="8_qwdj4"]
 
@@ -24,10 +25,19 @@ position = Vector2(108, 424)
 position = Vector2(565, 283)
 On = false
 
+[node name="LaserLight3" parent="." unique_id=111439582 instance=ExtResource("2_lkbjs")]
+position = Vector2(846, 390)
+rotation = 1.5707964
+On = false
+
 [node name="LaserLight" parent="." unique_id=666909323 instance=ExtResource("2_lkbjs")]
-position = Vector2(558, 75)
+position = Vector2(549, 67)
 
 [node name="RotateComponent" parent="LaserLight" unique_id=458849040 instance=ExtResource("5_lkbjs")]
+
+[node name="LightSwitch" parent="." unique_id=507182518 node_paths=PackedStringArray("Targets") instance=ExtResource("6_qwdj4")]
+position = Vector2(1062, 284)
+Targets = [NodePath("../LaserLight3")]
 
 [node name="Switch" parent="." unique_id=478898991 node_paths=PackedStringArray("Targets") instance=ExtResource("6_s04a7")]
 position = Vector2(36, 340)

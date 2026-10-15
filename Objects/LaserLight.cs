@@ -73,18 +73,26 @@ public partial class LaserLight : Node2D,IToggleable
 				query.CollisionMask = 1 | 2;
 				var result = spaceState.IntersectRay(query);
 
-				// if Count > 0 then it hit a wall
+				// if Count > 0 then it hit something
 				if (result.Count > 0)
 				{
-					// finish line at wall
-					hitPoints.Add(ToLocal((Vector2)result["position"]));
-					
-					// see if its player
+					//see what it hits
 					Node collider = (Node)result["collider"];
+					
+					//if it's a lightswitch press it, else stop position
+					if (collider.IsInGroup("lightswitch"))
+					{
+						collider.Call("LitUp");
+					} else
+					{
+						hitPoints.Add(ToLocal((Vector2)result["position"]));
+					}
+					
+					// if its player kill him
 					if (collider.IsInGroup("player"))
 					{
 						collider.Call("getHit");
-					}
+					}	
 				}
 				else
 				{
