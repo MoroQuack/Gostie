@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://c68fv0q4krafv"]
 
 [ext_resource type="Script" uid="uid://djbvd5tpk1d6p" path="res://Objects/LaserLight.cs" id="1_f8ruf"]
-[ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://Assets/icon.svg" id="2_s8m73"]
+[ext_resource type="Texture2D" uid="uid://iaaiwn4oa1v4" path="res://Assets/laser.png" id="2_f8ruf"]
 
 [node name="LaserLight" type="Node2D" unique_id=219088787]
 script = ExtResource("1_f8ruf")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=419989708]
-scale = Vector2(0.53, 0.53)
-texture = ExtResource("2_s8m73")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=326199160]
+position = Vector2(0, 3)
+scale = Vector2(2, 2)
+texture = ExtResource("2_f8ruf")

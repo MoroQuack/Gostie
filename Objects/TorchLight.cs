@@ -69,6 +69,7 @@ public partial class TorchLight : Node2D,IToggleable
 				// if Count > 0 then it hit smth
 				if (result.Count > 0)
 				{
+					drawEndPos = ToLocal((Vector2)result["position"]);
 					//see what it hits
 					Node collider = (Node)result["collider"];
 					
@@ -76,11 +77,7 @@ public partial class TorchLight : Node2D,IToggleable
 					if (collider.IsInGroup("lightswitch"))
 					{
 						collider.Call("LitUp");
-						drawEndPos = ToLocal(endPosition);
-					} else
-					{
-						drawEndPos = ToLocal((Vector2)result["position"]);
-					}
+					} 
 					
 					// if its player kill him
 					if (collider.IsInGroup("player"))

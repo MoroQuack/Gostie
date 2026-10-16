@@ -7,8 +7,8 @@ public partial class LaserLight : Node2D,IToggleable
 {
 	[Export] public int RayCount = 360; 
 	[Export] public float MaxDistance = 1000.0f;
-	[Export] public float Width = 50f;
-	[Export] public Color LineColor = new Color(80, 80, 80, 0.8f); 
+	[Export] public float Width = 15f;
+	[Export] public Color LineColor = new Color(200, 0, 0, 0.8f); 
 
 	[Export] public bool On = true;
 
@@ -76,16 +76,14 @@ public partial class LaserLight : Node2D,IToggleable
 				// if Count > 0 then it hit something
 				if (result.Count > 0)
 				{
+					hitPoints.Add(ToLocal((Vector2)result["position"]));
 					//see what it hits
 					Node collider = (Node)result["collider"];
 					
-					//if it's a lightswitch press it, else stop position
+					//if it's a lightswitch press it
 					if (collider.IsInGroup("lightswitch"))
 					{
 						collider.Call("LitUp");
-					} else
-					{
-						hitPoints.Add(ToLocal((Vector2)result["position"]));
 					}
 					
 					// if its player kill him

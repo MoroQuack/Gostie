@@ -22,7 +22,7 @@ position = Vector2(1047, 453)
 position = Vector2(108, 424)
 
 [node name="LaserLight2" parent="." unique_id=219088787 instance=ExtResource("2_lkbjs")]
-position = Vector2(565, 283)
+position = Vector2(235, 288)
 On = false
 
 [node name="LaserLight3" parent="." unique_id=111439582 instance=ExtResource("2_lkbjs")]
