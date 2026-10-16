@@ -7,10 +7,14 @@ public partial class Door : StaticBody2D,IToggleable
 	// Called when the node enters the scene tree for the first time.
 	
 	private CollisionShape2D _collider;
+	private AnimatedSprite2D _sprite;
 	
 	public override void _Ready()
 	{
 		_collider = this.GetNode<CollisionShape2D>("CollisionShape2D");
+		_sprite = this.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		if(Opened)_sprite.Play("opened");
+		else _sprite.Play("closed");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,12 +27,13 @@ public partial class Door : StaticBody2D,IToggleable
 		if (Opened)
 		{
 			_collider.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
-			this.Visible = true;
+			_sprite.PlayBackwards("opening");
+			
 		}
 		else
 		{
 			_collider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
-			this.Visible = false;
+			_sprite.Play("opening");
 		}
 		Opened = !Opened;
 

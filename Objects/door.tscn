@@ -1,20 +1,136 @@
 [gd_scene format=3 uid="uid://c3payecmod35v"]
 
-[ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://Assets/icon.svg" id="1_5xojw"]
 [ext_resource type="Script" uid="uid://cakbpl41l7p20" path="res://Objects/Door.cs" id="1_vkudc"]
+[ext_resource type="Texture2D" uid="uid://d3yavbwrwa4on" path="res://Assets/door.png" id="2_vkudc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkudc"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fpl1"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1mhi"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jicb0"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6phg8"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc2a2"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onmhv"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6hdd"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igb2v"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j22j0"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6biog"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3v1m"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08m7o"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqh08"]
+atlas = ExtResource("2_vkudc")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4j24a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkudc")
+}],
+"loop": 1,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fpl1")
+}],
+"loop": 1,
+"name": &"opened",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1mhi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jicb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6phg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc2a2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onmhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6hdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igb2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j22j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6biog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3v1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08m7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqh08")
+}],
+"loop": 0,
+"name": &"opening",
+"speed": 22.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ku4xe"]
-size = Vector2(44, 89)
+size = Vector2(33, 78)
 
 [node name="Door" type="StaticBody2D" unique_id=121685036]
 collision_layer = 2
 script = ExtResource("1_vkudc")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1055507224]
-position = Vector2(0.49999905, 0)
-scale = Vector2(0.39843753, 0.73)
-texture = ExtResource("1_5xojw")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=338892398]
+scale = Vector2(1.75, 1.75)
+sprite_frames = SubResource("SpriteFrames_4j24a")
+animation = &"closed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2100350937]
-position = Vector2(1, 0.5)
+position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_ku4xe")

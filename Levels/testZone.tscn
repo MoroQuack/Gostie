@@ -28,6 +28,7 @@ MaxDistance = 100.0
 
 [node name="Goal" parent="." unique_id=1044788402 instance=ExtResource("3_s04a7")]
 position = Vector2(1047, 453)
+nextScene = "level1.tscn"
 
 [node name="LaserLight2" parent="." unique_id=219088787 instance=ExtResource("2_lkbjs")]
 position = Vector2(235, 288)
@@ -61,6 +62,7 @@ Targets = [NodePath("../LaserLight2"), NodePath("../Door")]
 
 [node name="Door" parent="." unique_id=121685036 instance=ExtResource("8_qwdj4")]
 position = Vector2(657, 287)
+Opened = true
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("4_vofi0")]
 position = Vector2(108, 424)
