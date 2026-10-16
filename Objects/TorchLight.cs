@@ -13,6 +13,7 @@ public partial class TorchLight : Node2D,IToggleable
 	private AnimatedSprite2D _sprite;
 
 	private List<Vector2> _drawPoints = new List<Vector2>();
+	private List<Vector2> _oldPoints = new List<Vector2>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -48,6 +49,8 @@ public partial class TorchLight : Node2D,IToggleable
 
 			
 			float angleStep = Mathf.Tau / 360;
+
+			List<Vector2> newPoints = new List<Vector2>();
 
 			for (int i = 0; i < RayCount; i++)
 			{
@@ -90,9 +93,39 @@ public partial class TorchLight : Node2D,IToggleable
 					// draw full line
 					drawEndPos = ToLocal(endPosition);
 				}
-				_drawPoints.Add(drawEndPos);
-			}			
-			QueueRedraw();
+				newPoints.Add(drawEndPos);
+			}		
+
+			//check if has to be redrawn
+
+
+			bool needsRedraw = false;
+			//GD.Print("New points: " + newPoints.Count());
+			//GD.Print("Old points: " + _oldPoints.Count());
+			if (newPoints.Count != _oldPoints.Count)
+			{
+				needsRedraw = true; // Different number of points 
+			} else
+			{
+				for (int i = 0; i < newPoints.Count; i++)
+				{
+					// If any point moved by more than a tiny fraction of a pixel, trigger a redraw.
+					float distanceSq = newPoints[i].DistanceSquaredTo(_oldPoints[i]);
+					if (distanceSq > 1.0f)
+					{
+						needsRedraw = true;
+						break;
+					}
+				}
+			}
+
+			if(needsRedraw){
+				//GD.Print("Drawing...");
+				_drawPoints.AddRange(newPoints);
+				_oldPoints.Clear();
+				_oldPoints.AddRange(newPoints);
+				QueueRedraw();
+			}	
 		}
 	}
 
@@ -116,6 +149,7 @@ public partial class TorchLight : Node2D,IToggleable
 	public void _EraseEverything()
 	{
 		_drawPoints.Clear();
+		_oldPoints.Clear();
 		QueueRedraw();
 	}
 
