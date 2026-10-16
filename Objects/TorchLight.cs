@@ -77,7 +77,7 @@ public partial class TorchLight : Node2D,IToggleable
 					Node collider = (Node)result["collider"];
 					
 					//if it's a lightswitch press it, else stop position
-					if (collider.IsInGroup("lightswitch"))
+					if (collider.IsInGroup("solarpanel"))
 					{
 						collider.Call("LitUp");
 					} 

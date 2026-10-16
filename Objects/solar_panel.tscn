@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://kbxkx6ydftrw"]
+
+[ext_resource type="Script" uid="uid://brhg3qiuii7rd" path="res://Objects/SolarPanel.cs" id="1_s0s2y"]
+[ext_resource type="Texture2D" uid="uid://wrotb7o28fx2" path="res://Assets/solar panel.png" id="2_edvxr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykux4"]
+atlas = ExtResource("2_edvxr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko35d"]
+atlas = ExtResource("2_edvxr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ku4xe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykux4")
+}],
+"loop": 1,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko35d")
+}],
+"loop": 1,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvva8"]
+size = Vector2(27.229366, 30.535374)
+
+[node name="SolarPanel" type="StaticBody2D" unique_id=507182518 node_paths=PackedStringArray("Targets")]
+script = ExtResource("1_s0s2y")
+Targets = []
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1543984238]
+scale = Vector2(2.125, 2.125)
+sprite_frames = SubResource("SpriteFrames_ku4xe")
+animation = &"on"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=979761438]
+position = Vector2(-1.0000002, -1.9999996)
+rotation = 0.2617994
+scale = Vector2(2.125, 2.125)
+skew = -0.30543268
+shape = SubResource("RectangleShape2D_hvva8")

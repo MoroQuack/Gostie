@@ -3,17 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-public partial class LightSwitch : StaticBody2D
+public partial class SolarPanel : StaticBody2D
 {
 	//stuff it toggles
 	[Export] public Godot.Collections.Array<Node2D> Targets;
+	private AnimatedSprite2D _sprite;
 
 	private bool _isLit = false;
 	private bool _wasLit = false;
 
 	public override void _Ready()
 	{
-		AddToGroup("lightswitch");
+		AddToGroup("solarpanel");
+		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -22,13 +24,13 @@ public partial class LightSwitch : StaticBody2D
 		if (_isLit && !_wasLit)
 		{
 			GD.Print("I got lighted up yoooo!");
-			Modulate = new Color(1, 1, 0); //turn yellow
+			_sprite.Play("on");
 			ToggleEverything();
 		}
 		else if (!_isLit && _wasLit)
 		{
 			GD.Print("I'm not lit anymore :(");
-			Modulate = new Color(1, 1, 1); // Return to normal
+			_sprite.Play("off");
 			ToggleEverything();
 		}
   
