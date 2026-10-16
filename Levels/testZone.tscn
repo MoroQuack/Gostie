@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://bi86d4h5u7rf3" path="res://Assets/tiles/tileSetData.tres" id="1_w1ixc"]
 [ext_resource type="PackedScene" uid="uid://vrrqwgksbctp" path="res://Objects/torch_light.tscn" id="2_85cnu"]
 [ext_resource type="PackedScene" uid="uid://c68fv0q4krafv" path="res://Objects/laser_light.tscn" id="2_lkbjs"]
-[ext_resource type="PackedScene" uid="uid://v2ulg5sh8lmx" path="res://Objects/goal.tscn" id="3_s04a7"]
+[ext_resource type="PackedScene" uid="uid://v2ulg5sh8lmx" path="res://Objects/cheese.tscn" id="3_s04a7"]
 [ext_resource type="PackedScene" uid="uid://c3gsil7t3i3mk" path="res://Player/gostie.tscn" id="4_vofi0"]
 [ext_resource type="PackedScene" uid="uid://cvth7vbbhtlb2" path="res://Objects/rotate_component.tscn" id="5_lkbjs"]
 [ext_resource type="PackedScene" uid="uid://32h4iysmtqwo" path="res://Objects/flickering_component.tscn" id="6_owgi5"]

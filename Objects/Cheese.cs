@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 
-public partial class Goal : Area2D
+public partial class Cheese : Area2D
 {
 	[Export]
 	public string nextScene = "level2.tscn";
