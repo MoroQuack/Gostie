@@ -15,6 +15,10 @@ run/main_scene="uid://m5vcems6wihp"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+BackgroundMusic="*uid://dcplbtq5fapo5"
+
 [display]
 
 window/stretch/mode="canvas_items"
