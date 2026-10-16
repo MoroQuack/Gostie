@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cakbpl41l7p20" path="res://Objects/Door.cs" id="1_vkudc"]
 [ext_resource type="Texture2D" uid="uid://d3yavbwrwa4on" path="res://Assets/door.png" id="2_vkudc"]
+[ext_resource type="AudioStream" uid="uid://bgyii5gpf1snb" path="res://Sounds/doorOpen.wav" id="2_y1mhi"]
+[ext_resource type="AudioStream" uid="uid://cysagk08lsj3e" path="res://Sounds/doorClose.wav" id="3_jicb0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkudc"]
 atlas = ExtResource("2_vkudc")
@@ -125,6 +127,8 @@ size = Vector2(33, 78)
 [node name="Door" type="StaticBody2D" unique_id=121685036]
 collision_layer = 2
 script = ExtResource("1_vkudc")
+OpenSound = ExtResource("2_y1mhi")
+CloseSound = ExtResource("3_jicb0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=338892398]
 scale = Vector2(1.75, 1.75)
@@ -134,3 +138,6 @@ animation = &"closed"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2100350937]
 position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_ku4xe")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=86019720]
+volume_db = -10.0

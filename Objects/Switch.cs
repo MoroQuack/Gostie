@@ -8,6 +8,12 @@ public partial class Switch : Area2D
 	//stuff it toggles
 	[Export] public Godot.Collections.Array<Node2D> Targets;
 
+
+	//sounds
+	[Export] public AudioStream OnSound;
+	[Export] public AudioStream OffSound;
+	private AudioStreamPlayer _audioPlayer;
+
 	private bool _isPressed = false;
 	private AnimatedSprite2D _sprite;
 
@@ -16,7 +22,8 @@ public partial class Switch : Area2D
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		ChangeState();
+		_audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		PlayAnimation();
 	}
 
 	// Press it
@@ -39,13 +46,18 @@ public partial class Switch : Area2D
 	}
 	public void ChangeState()
 	{
-		if (_isPressed)
-		{
-			_sprite.Play("on");
-		}
-		else
-		{
-			_sprite.Play("off");
-		}
+		PlayAnimation();
+		PlaySounds();
+	}
+	private void PlayAnimation()
+	{
+		if (_isPressed)_sprite.Play("on");
+		else _sprite.Play("off");
+	}
+	private void PlaySounds()
+	{
+		if (_isPressed)_audioPlayer.Stream = OnSound; 
+		else _audioPlayer.Stream = OffSound; 
+		_audioPlayer.Play();
 	}
 }

@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cqv2dv56myhxc"]
 
 [ext_resource type="Script" uid="uid://bk5g8i0g3t6ug" path="res://Objects/Switch.cs" id="1_g0mj6"]
+[ext_resource type="AudioStream" uid="uid://cjkmw8c1ctp62" path="res://Sounds/clickOn.wav" id="2_4du7u"]
 [ext_resource type="Texture2D" uid="uid://df7wijggyj3rp" path="res://Assets/light switch.png" id="2_g0mj6"]
+[ext_resource type="AudioStream" uid="uid://vdn8vyxc48y" path="res://Sounds/clickOff.wav" id="3_63c0x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6sxct"]
 atlas = ExtResource("2_g0mj6")
@@ -36,6 +38,8 @@ size = Vector2(18.811651, 38.878433)
 [node name="Switch" type="Area2D" unique_id=478898991 node_paths=PackedStringArray("Targets")]
 script = ExtResource("1_g0mj6")
 Targets = []
+OnSound = ExtResource("2_4du7u")
+OffSound = ExtResource("3_63c0x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=729354832]
 scale = Vector2(2.355, 2.355)
@@ -46,5 +50,7 @@ animation = &"off"
 position = Vector2(7.999999, 2.2206395)
 scale = Vector2(2.355, 2.355)
 shape = SubResource("RectangleShape2D_4du7u")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1895925293]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
