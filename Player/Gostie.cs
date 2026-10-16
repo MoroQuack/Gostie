@@ -8,6 +8,7 @@ public partial class Gostie : CharacterBody2D
 	[Export]
 	public float JumpVelocity = -500.0f;
 	private bool _invincible = true;
+	private AnimatedSprite2D _sprite;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -15,6 +16,7 @@ public partial class Gostie : CharacterBody2D
 		GD.Print("Player spawned");
 		AddToGroup("player");
 		_Wait();
+		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 
 	private async void _Wait()
@@ -43,6 +45,7 @@ public partial class Gostie : CharacterBody2D
 			newVelocity.Y = Mathf.MoveToward(Velocity.Y,0,Speed);
 		}
 		Velocity = newVelocity;
+		Animate();
 		MoveAndSlide();
 	}
 
@@ -50,5 +53,22 @@ public partial class Gostie : CharacterBody2D
 	{
 		GD.Print("Player hit");
 		if(!_invincible)GetTree().ReloadCurrentScene();
+	}
+	
+	private void Animate()
+	{
+		if(Velocity != Vector2.Zero)
+		{
+			_sprite.Play("walk");
+		}else _sprite.Play("idle");
+
+		if (Velocity.X > 0)
+		{
+			_sprite.FlipH = false; // Moving right, face normally
+		}
+		else if (Velocity.X < 0)
+		{
+			_sprite.FlipH = true;  // Moving left, flip horizontally
+		}
 	}
 }
