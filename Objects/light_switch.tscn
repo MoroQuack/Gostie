@@ -3,15 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://Assets/icon.svg" id="1_74ofr"]
 [ext_resource type="Script" uid="uid://brhg3qiuii7rd" path="res://Objects/LightSwitch.cs" id="1_s0s2y"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4j24a"]
-radius = 22.022715
+[sub_resource type="CircleShape2D" id="CircleShape2D_ku4xe"]
+radius = 36.124783
 
-[node name="LightSwitch" type="StaticBody2D" unique_id=507182518]
+[node name="LightSwitch" type="StaticBody2D" unique_id=507182518 node_paths=PackedStringArray("Targets")]
 script = ExtResource("1_s0s2y")
+Targets = []
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=188273582]
-shape = SubResource("CircleShape2D_4j24a")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1416451328]
-scale = Vector2(0.29, 0.29)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1686369938]
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_74ofr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=979761438]
+shape = SubResource("CircleShape2D_ku4xe")

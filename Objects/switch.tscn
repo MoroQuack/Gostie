@@ -1,21 +1,50 @@
 [gd_scene format=3 uid="uid://cqv2dv56myhxc"]
 
 [ext_resource type="Script" uid="uid://bk5g8i0g3t6ug" path="res://Objects/Switch.cs" id="1_g0mj6"]
-[ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://Assets/icon.svg" id="1_yyvnn"]
+[ext_resource type="Texture2D" uid="uid://df7wijggyj3rp" path="res://Assets/light switch.png" id="2_g0mj6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4j24a"]
-size = Vector2(21, 68)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sxct"]
+atlas = ExtResource("2_g0mj6")
+region = Rect2(64, 0, 64, 64)
 
-[node name="Switch" type="Area2D" unique_id=478898991]
+[sub_resource type="AtlasTexture" id="AtlasTexture_34b7x"]
+atlas = ExtResource("2_g0mj6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cvhsv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sxct")
+}],
+"loop": 1,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34b7x")
+}],
+"loop": 1,
+"name": &"on",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4du7u"]
+size = Vector2(18.811651, 38.878433)
+
+[node name="Switch" type="Area2D" unique_id=478898991 node_paths=PackedStringArray("Targets")]
 script = ExtResource("1_g0mj6")
+Targets = []
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=62627617]
-position = Vector2(0.50000095, -1.4999995)
-scale = Vector2(0.2265625, 0.5390625)
-texture = ExtResource("1_yyvnn")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=729354832]
+scale = Vector2(2.355, 2.355)
+sprite_frames = SubResource("SpriteFrames_cvhsv")
+animation = &"off"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=13617060]
-position = Vector2(4, -2)
-shape = SubResource("RectangleShape2D_4j24a")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1258082946]
+position = Vector2(7.999999, 2.2206395)
+scale = Vector2(2.355, 2.355)
+shape = SubResource("RectangleShape2D_4du7u")
 
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

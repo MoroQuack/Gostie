@@ -9,8 +9,17 @@ public partial class Switch : Area2D
 	[Export] public Godot.Collections.Array<Node2D> Targets;
 
 	private bool _isPressed = false;
+	private AnimatedSprite2D _sprite;
 
-	// You would call this when the player steps on it or presses interact
+
+
+	public override void _Ready()
+	{
+		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		ChangeState();
+	}
+
+	// Press it
 	public void Press()
 	{
 		GD.Print("Click!");
@@ -22,9 +31,21 @@ public partial class Switch : Area2D
 				(node as IToggleable).ChangeOnOf();
 			}
 		}
+		ChangeState();
 	}
-	public void _on_body_exited(Node2D body)
+	public void _on_body_entered(Node2D body)
 	{
 		Press();
+	}
+	public void ChangeState()
+	{
+		if (_isPressed)
+		{
+			_sprite.Play("on");
+		}
+		else
+		{
+			_sprite.Play("off");
+		}
 	}
 }
