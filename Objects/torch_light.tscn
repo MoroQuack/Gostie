@@ -1,11 +1,63 @@
 [gd_scene format=3 uid="uid://vrrqwgksbctp"]
 
 [ext_resource type="Script" uid="uid://blmedor5po608" path="res://Objects/TorchLight.cs" id="1_f8ruf"]
-[ext_resource type="Texture2D" uid="uid://qvh2uhpv3xfx" path="res://Assets/icon.svg" id="2_s8m73"]
+[ext_resource type="Texture2D" uid="uid://jecaxrll3i03" path="res://Assets/Torch Light.png" id="2_wixpc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi6m6"]
+atlas = ExtResource("2_wixpc")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33ydt"]
+atlas = ExtResource("2_wixpc")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4mde"]
+atlas = ExtResource("2_wixpc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s85r1"]
+atlas = ExtResource("2_wixpc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4j24a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi6m6")
+}],
+"loop": 1,
+"name": &"bulb_off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ydt")
+}],
+"loop": 1,
+"name": &"bulb_on",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4mde")
+}],
+"loop": 1,
+"name": &"torch_off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s85r1")
+}],
+"loop": 1,
+"name": &"torch_on",
+"speed": 1.0
+}]
 
 [node name="LaserLight" type="Node2D" unique_id=44203302]
 script = ExtResource("1_f8ruf")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1589111472]
-scale = Vector2(0.53, 0.53)
-texture = ExtResource("2_s8m73")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1366685139]
+scale = Vector2(2.165, 2.165)
+sprite_frames = SubResource("SpriteFrames_4j24a")
+animation = &"torch_on"

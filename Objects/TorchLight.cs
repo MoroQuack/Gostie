@@ -10,6 +10,7 @@ public partial class TorchLight : Node2D,IToggleable
 	[Export] public Color LineColor = new Color(80, 80, 80, 0.8f); 
 
 	[Export] public bool On = true;
+	private AnimatedSprite2D _sprite;
 
 	private List<Vector2> _drawPoints = new List<Vector2>();
 
@@ -19,6 +20,7 @@ public partial class TorchLight : Node2D,IToggleable
 		SetPhysicsProcess(false);
 		//Wait because it would load before walls
 		_Wait();
+		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		//Redraws
 		QueueRedraw();
 	}
@@ -29,7 +31,8 @@ public partial class TorchLight : Node2D,IToggleable
 	}
 
 	public override void _PhysicsProcess (double delta)
-	{	
+	{
+		Animate();	
 		CalculateDrawingPoints();
 	}
 
@@ -127,5 +130,13 @@ public partial class TorchLight : Node2D,IToggleable
 	public bool IsOn()
 	{
 		return On;
+	}
+
+	private void Animate()
+	{
+		if(RayCount==360 && IsOn())_sprite.Play("bulb_on");
+		else if(RayCount==360 && !IsOn())_sprite.Play("bulb_off");
+		else if(RayCount!=360 && IsOn())_sprite.Play("torch_on");
+		else _sprite.Play("torch_off");
 	}
 }
