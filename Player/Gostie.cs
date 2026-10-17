@@ -8,6 +8,7 @@ public partial class Gostie : CharacterBody2D
 	[Export]
 	public float JumpVelocity = -500.0f;
 	private bool _invincible = true;
+	private bool _isDead = false;
 	private AnimatedSprite2D _sprite;
 
 	// Called when the node enters the scene tree for the first time.
@@ -21,7 +22,7 @@ public partial class Gostie : CharacterBody2D
 
 	private async void _Wait()
 	{
-		await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout);
+		await ToSignal(GetTree().CreateTimer(0.3), SceneTreeTimer.SignalName.Timeout);
 		_invincible = false;
 	}
 
@@ -30,6 +31,7 @@ public partial class Gostie : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		if (_isDead) return;
 		Vector2 newVelocity = Velocity;
 
 		Vector2 direction = Input.GetVector("left", "right","up","down");
@@ -49,10 +51,18 @@ public partial class Gostie : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	public void getHit()
+	public async void getHit()
 	{
+		if(_invincible) return;
+		if(_isDead)return;
 		GD.Print("Player hit");
-		if(!_invincible)GetTree().ReloadCurrentScene();
+		_isDead = true;
+		_sprite.Hide();
+		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+   		GetNode<GpuParticles2D>("DeathParticles").Emitting = true;
+		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
+		await ToSignal(GetTree().CreateTimer(1.0f), SceneTreeTimer.SignalName.Timeout);		
+		GetTree().ReloadCurrentScene();
 	}
 	
 	private void Animate()
