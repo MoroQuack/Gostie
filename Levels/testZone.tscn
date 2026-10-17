@@ -26,9 +26,9 @@ RayCount = 20
 position = Vector2(247, 112)
 MaxDistance = 100.0
 
-[node name="Goal" parent="." unique_id=1044788402 instance=ExtResource("3_s04a7")]
-position = Vector2(1047, 453)
-nextScene = "level1.tscn"
+[node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("3_s04a7")]
+position = Vector2(253, 496)
+currentLevel = 1
 
 [node name="LaserLight2" parent="." unique_id=219088787 instance=ExtResource("2_lkbjs")]
 position = Vector2(235, 288)
@@ -47,7 +47,7 @@ StaysOnTimer = 1.0
 StaysOffTimer = 1.0
 
 [node name="LaserLight3" parent="." unique_id=1558421376 instance=ExtResource("2_lkbjs")]
-position = Vector2(257, 383)
+position = Vector2(463, 427)
 rotation = 1.5707964
 RayCount = 15
 On = false

@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bx2rhuncb3bgn" path="res://Objects/Cheese.cs" id="1_ej8sy"]
 [ext_resource type="Texture2D" uid="uid://8lciire8ng3x" path="res://Assets/Cheese.png" id="2_ej8sy"]
+[ext_resource type="AudioStream" uid="uid://dev1i31iheobk" path="res://Sounds/clapping.wav" id="3_t56tp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1euox"]
 size = Vector2(90.37552, 83.903076)
 
 [node name="Cheese" type="Area2D" unique_id=1044788402]
+collision_layer = 8
 script = ExtResource("1_ej8sy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=615866296]
@@ -19,5 +21,9 @@ rotation = -0.2792528
 scale = Vector2(0.93, 0.93)
 skew = 0.28797913
 shape = SubResource("RectangleShape2D_1euox")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1120350536]
+stream = ExtResource("3_t56tp")
+volume_db = -12.18
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
