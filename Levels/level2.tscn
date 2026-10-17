@@ -23,9 +23,10 @@ MaxDistance = 250.0
 position = Vector2(868, 443)
 MaxDistance = 200.0
 
-[node name="Goal" parent="." unique_id=1044788402 instance=ExtResource("3_dj5hn")]
+[node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("3_dj5hn")]
 position = Vector2(1012, 84)
 nextScene = "level3.tscn"
+currentLevel = 2
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("4_ojro4")]
 position = Vector2(59, 157)

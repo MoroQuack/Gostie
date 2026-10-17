@@ -15,8 +15,10 @@ tile_set = ExtResource("1_njhy2")
 position = Vector2(573, 197)
 RayCount = 45
 
-[node name="Goal" parent="." unique_id=1044788402 instance=ExtResource("4_aunfx")]
+[node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("4_aunfx")]
 position = Vector2(1047, 453)
+nextScene = "level2.tscn"
+currentLevel = 1
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("2_m6f6w")]
 position = Vector2(108, 424)

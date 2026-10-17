@@ -1,11 +1,12 @@
 using Godot;
 using System;
+using System.Runtime.InteropServices.Marshalling;
 
 
 public partial class Cheese : Area2D
 {
-	[Export]
-	public string nextScene = "level2.tscn";
+	[Export] public string nextScene = "level1.tscn";
+	[Export] public int currentLevel;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -21,6 +22,10 @@ public partial class Cheese : Area2D
 		if (body.IsInGroup("player"))
 		{
 			GD.Print("player won!");
+			if(SaveDataManager.Instance.Data.FinishedLevel < currentLevel){
+				SaveDataManager.Instance.Data.FinishedLevel = currentLevel;
+				SaveDataManager.Instance.SaveGame();
+			}
 			GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile,"res://Levels/" + nextScene);
 		}
 		

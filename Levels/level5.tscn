@@ -15,6 +15,7 @@ tile_set = ExtResource("1_fh8n1")
 [node name="Goal" parent="." unique_id=1044788402 instance=ExtResource("3_b3501")]
 position = Vector2(1086, 314)
 nextScene = "level5.tscn"
+currentLevel = 5
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("4_fj68v")]
 position = Vector2(81, 309)
