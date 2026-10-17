@@ -19,10 +19,14 @@ public partial class MainMenu : Control
 	private void OnPlayPressed()
 	{
 		int nextLevel = SaveDataManager.Instance.Data.FinishedLevel + 1;
+		if (nextLevel > GlobalData.Instance.NumberOfLevels)
+		{
+			nextLevel = GlobalData.Instance.NumberOfLevels;
+		}
 
 		var music = GetNode<AudioStreamPlayer>("/root/BackgroundMusic");
 		music.Play();
-
+		
 		GetTree().ChangeSceneToFile("res://Levels/level" + nextLevel.ToString() + ".tscn");
 	}
 

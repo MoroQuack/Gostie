@@ -27,13 +27,13 @@ public partial class Cheese : Area2D
 		if(_alreadyWon)return;
 		if (body.IsInGroup("player"))
 		{
+			Win();
 			GD.Print("player won!");
 			if(SaveDataManager.Instance.Data.FinishedLevel < currentLevel){
 				SaveDataManager.Instance.Data.FinishedLevel = currentLevel;
-				SaveDataManager.Instance.SaveGame();
 			}
+			SaveDataManager.Instance.SaveGame();
 			
-			Win();
 		}
 		
 	}

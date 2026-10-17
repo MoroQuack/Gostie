@@ -6,7 +6,7 @@ using System.Threading;
 
 public partial class LaserLight : Node2D,IToggleable
 {
-	[Export] public int RayCount = 360; 
+	[Export] public int RayCount = 15; 
 	[Export] public float MaxDistance = 1000.0f;
 	[Export] public float Width = 15f;
 	[Export] public Color LineColor = new Color(200, 0, 0, 0.8f); 

@@ -54,7 +54,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="LaserLight" type="Node2D" unique_id=44203302]
+[node name="TorchLight" type="Node2D" unique_id=44203302]
 script = ExtResource("1_f8ruf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1366685139]

@@ -5,7 +5,8 @@ using System.Text.Json;
 
 public class GameData
 {
-	public int FinishedLevel { get; set; } = 1;
+	public int FinishedLevel { get; set; } = 0;
+
 	//public float MasterVolume { get; set; } = 0.0f;
 }
 
@@ -28,6 +29,7 @@ public sealed class SaveDataManager
 	{
 		GD.Print("Level unlocked: " + Data.UnlockedLevel.ToString() );
 	}*/
+
 	public void SaveGame()
 	{
 		string jsonString = JsonSerializer.Serialize(Data);
