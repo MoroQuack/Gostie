@@ -153,9 +153,13 @@ public partial class TorchLight : Node2D,IToggleable
 		QueueRedraw();
 	}
 
-	public void ChangeOnOf()
+	public async void ChangeOnOf()
 	{
 		if(On==true)_EraseEverything();
+		if (On == false)
+		{
+			await ToSignal(GetTree().CreateTimer(0.1f), SceneTreeTimer.SignalName.Timeout);
+		}
 		On=!On;
 	}
 	public bool IsOn()

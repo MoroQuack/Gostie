@@ -3,7 +3,7 @@ using System;
 public sealed class GlobalData
 {
 	
-	public int NumberOfLevels {get;} = 11;
+	public int NumberOfLevels {get;} = 16;
 	private static readonly Lazy<GlobalData> _instance = 
 		new Lazy<GlobalData>(() => new GlobalData());
 

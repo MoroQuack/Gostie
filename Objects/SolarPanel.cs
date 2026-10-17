@@ -16,6 +16,7 @@ public partial class SolarPanel : StaticBody2D
 	{
 		AddToGroup("solarpanel");
 		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		if(!_isLit)_sprite.Play("off");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -37,6 +38,7 @@ public partial class SolarPanel : StaticBody2D
 		_wasLit = _isLit;
 
 		_isLit = false;
+		
 	}
 
 

@@ -18,7 +18,10 @@ public partial class Door : StaticBody2D,IToggleable
 	{
 		_collider = this.GetNode<CollisionShape2D>("CollisionShape2D");
 		_sprite = this.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		if(Opened)_sprite.Play("opened");
+		if(Opened){
+			_sprite.Play("opened");
+			_collider.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		}
 		else _sprite.Play("closed");
 		_audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 	}
