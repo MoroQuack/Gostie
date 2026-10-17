@@ -3,6 +3,7 @@ using Godot;
 public partial class RotateComponent : Node
 {
 	[Export] public float SpinSpeed = 2.0f;
+	[Export] bool clockwise = true;
 	
 	// This will hold whatever object this component is attached to
 	private Node2D _parent;
@@ -17,7 +18,8 @@ public partial class RotateComponent : Node
 	{
 		if (_parent != null)
 		{
-			_parent.Rotation += SpinSpeed * (float)delta;
+			if(clockwise)_parent.Rotation += SpinSpeed * (float)delta;
+			else _parent.Rotation -= SpinSpeed * (float)delta;
 		}
 	}
 }
