@@ -41,7 +41,9 @@ layout_mode = 2
 text = "Levels"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1831093739]
+visible = false
 custom_minimum_size = Vector2(400, 100)
 custom_maximum_size = Vector2(500, -1)
 layout_mode = 2
+disabled = true
 text = "Settings"

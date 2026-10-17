@@ -14,6 +14,9 @@ public partial class MainMenu : Control
 		levels.Pressed += OnLevelsPressed;
 		settings.Pressed += OnSettingsPressed;
 
+		var music = GetNode<AudioStreamPlayer>("/root/BackgroundMusic");
+		music.Stop();
+
 	}
 
 	private void OnPlayPressed()
