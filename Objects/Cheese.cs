@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public partial class Cheese : Area2D
 {
-	[Export] public string nextScene = "level1.tscn";
+	[Export] public string nextScene = "res://Levels/level1.tscn";
 	[Export] public int currentLevel;
 	private AudioStreamPlayer _audioPlayer;
 
@@ -43,6 +43,6 @@ public partial class Cheese : Area2D
 		_alreadyWon=true;
 		_audioPlayer.Play();
 		await ToSignal(GetTree().CreateTimer(2.5f), SceneTreeTimer.SignalName.Timeout);
-		GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile,"res://Levels/" + nextScene);
+		GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile,nextScene);
 	}
 }

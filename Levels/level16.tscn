@@ -15,23 +15,24 @@ tile_map_data = PackedByteArray("AAAAACMAAQAAAAAAAAAAACQAAQAAAAAAAAAAACUAAQAAAAA
 tile_set = ExtResource("1_nfgpt")
 metadata/_edit_lock_ = true
 
-[node name="Switch" parent="TileMapLayer" unique_id=478898991 node_paths=PackedStringArray("Targets") instance=ExtResource("2_xbjan")]
+[node name="Switch" parent="." unique_id=478898991 node_paths=PackedStringArray("Targets") instance=ExtResource("2_xbjan")]
 position = Vector2(636, 56)
 rotation = 1.5707964
-Targets = [NodePath("../../LaserLight"), NodePath("../../LaserLight2")]
+Targets = [NodePath("../LaserLight"), NodePath("../LaserLight2")]
 
-[node name="Switch2" parent="TileMapLayer" unique_id=66647097 node_paths=PackedStringArray("Targets") instance=ExtResource("2_xbjan")]
+[node name="Switch2" parent="." unique_id=66647097 node_paths=PackedStringArray("Targets") instance=ExtResource("2_xbjan")]
 position = Vector2(39, 278)
-Targets = [NodePath("../../LaserLight2"), NodePath("../../LaserLight")]
+Targets = [NodePath("../LaserLight2"), NodePath("../LaserLight")]
 
-[node name="Switch3" parent="TileMapLayer" unique_id=1869492727 node_paths=PackedStringArray("Targets") instance=ExtResource("2_xbjan")]
+[node name="Switch3" parent="." unique_id=1869492727 node_paths=PackedStringArray("Targets") instance=ExtResource("2_xbjan")]
 position = Vector2(1099, 466)
-scale = Vector2(-1, 1)
-Targets = [NodePath("../../LaserLight"), null]
+rotation = 3.1415927
+scale = Vector2(1, -1)
+Targets = [NodePath("../LaserLight"), null]
 
 [node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("3_6kg6b")]
 position = Vector2(1057, 289)
-nextScene = "level17.tscn"
+nextScene = "res://Levels/level17.tscn"
 currentLevel = 16
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("4_o6mng")]

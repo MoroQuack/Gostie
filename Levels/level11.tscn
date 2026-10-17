@@ -17,7 +17,7 @@ metadata/_edit_lock_ = true
 
 [node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("2_mw4w7")]
 position = Vector2(74, 272)
-nextScene = "level12.tscn"
+nextScene = "res://Levels/level12.tscn"
 currentLevel = 11
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("3_lhgom")]

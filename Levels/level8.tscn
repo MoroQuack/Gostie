@@ -14,7 +14,7 @@ tile_set = ExtResource("1_kn11c")
 
 [node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("2_u32wl")]
 position = Vector2(858, 281)
-nextScene = "level9.tscn"
+nextScene = "res://Levels/level9.tscn"
 currentLevel = 8
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("3_qog6k")]

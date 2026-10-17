@@ -15,18 +15,18 @@ tile_map_data = PackedByteArray("AAAAACMAAQAAAAAAAAAAACQAAQAAAAAAAAAAACUAAQAAAAA
 tile_set = ExtResource("1_gnsc4")
 metadata/_edit_lock_ = true
 
-[node name="Switch" parent="TileMapLayer" unique_id=478898991 node_paths=PackedStringArray("Targets") instance=ExtResource("2_t3ona")]
+[node name="Switch2" parent="." unique_id=66647097 node_paths=PackedStringArray("Targets") instance=ExtResource("2_t3ona")]
+position = Vector2(39, 297)
+Targets = [NodePath("../LaserLight")]
+
+[node name="Switch" parent="." unique_id=478898991 node_paths=PackedStringArray("Targets") instance=ExtResource("2_t3ona")]
 position = Vector2(644, 56)
 rotation = 1.5707964
-Targets = [NodePath("../../LaserLight"), NodePath("../../LaserLight2")]
-
-[node name="Switch2" parent="TileMapLayer" unique_id=66647097 node_paths=PackedStringArray("Targets") instance=ExtResource("2_t3ona")]
-position = Vector2(39, 297)
-Targets = [NodePath("../../LaserLight")]
+Targets = [NodePath("../LaserLight"), NodePath("../LaserLight2")]
 
 [node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("3_15yw8")]
 position = Vector2(1057, 289)
-nextScene = "level16.tscn"
+nextScene = "res://Levels/level16.tscn"
 currentLevel = 15
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("4_jhx0v")]

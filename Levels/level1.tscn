@@ -17,7 +17,7 @@ RayCount = 45
 
 [node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("4_aunfx")]
 position = Vector2(1047, 453)
-nextScene = "level2.tscn"
+nextScene = "res://Levels/level2.tscn"
 currentLevel = 1
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("2_m6f6w")]

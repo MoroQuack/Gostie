@@ -16,13 +16,13 @@ tile_map_data = PackedByteArray("AAAAACMAAQAAAAAAAAAAACQAAQAAAAAAAAAAACUAAQAAAAA
 tile_set = ExtResource("1_q71bd")
 metadata/_edit_lock_ = true
 
-[node name="Switch" parent="TileMapLayer" unique_id=478898991 node_paths=PackedStringArray("Targets") instance=ExtResource("5_bjrem")]
+[node name="Switch" parent="." unique_id=478898991 node_paths=PackedStringArray("Targets") instance=ExtResource("5_bjrem")]
 position = Vector2(395, 279)
-Targets = [NodePath("../../TorchLight")]
+Targets = [NodePath("../TorchLight")]
 
 [node name="Cheese" parent="." unique_id=1044788402 instance=ExtResource("2_l7wg5")]
 position = Vector2(1067, 288)
-nextScene = "level15.tscn"
+nextScene = "res://Levels/level15.tscn"
 currentLevel = 14
 
 [node name="Gostie" parent="." unique_id=202634215 instance=ExtResource("3_mgh24")]
